@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>See Progress</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Plot Progress</h1>
+
+        <form method="post" action="{{ url_for('plot_progress') }}">
+            <div class="input-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="exercise">Exercise:</label>
+                <input type="text" id="exercise" name="exercise" required>
+
+                <label for="max">Max Reps (optional):</label>
+                <input type="number" id="max" name="max">
+
+                <label for="min">Min Reps (optional):</label>
+                <input type="number" id="min" name="min">
+            </div>
+            <input type="submit" value="Enter" class="submit-button">
+        </form>
+    </div>
+
+</body>
+</html>
+

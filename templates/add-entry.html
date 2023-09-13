@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jim Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Add Entry</h1>
+
+        {%if display_err%}
+            <p>Please enter a value for the name and exercise fields</p>
+        {%endif%}
+
+        <form method="post" action="{{ url_for('add_entry') }}">
+            <div class="input-group">
+                <label for="name">Name:</label>
+                <select id="name" name="name" required>                    
+                    {%for i in list_names%}
+                        <option value="{{ i.name }}">{{ i.name }}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="exercise">Exercise:</label>
+                <select id="exercise" name="exercise" required>                    
+                    {%for i in list_exercises%}
+                        <option value="{{ i.Name }}">{{ i.Name }}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="weight">Weight:</label>
+                <input type="text" id="weight" name="weight">
+            </div>
+
+            <div class="input-group">
+                <label for="reps">Reps / Seconds:</label>
+                <input type="text" id="reps" name="reps" required>
+            </div>
+
+            <input type="submit" value="Enter" class="submit-button">
+        </form>
+    </div>
+
+</body>
+</html>
