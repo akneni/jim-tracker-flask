@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import io
 from plotdep import *
+import operator
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
@@ -16,9 +17,13 @@ jim_tracker_db = client.get_database('jim-tracker')
 
 
 
-# Global Vars
-list_exercises = [''] + list(jim_tracker_db.get_collection('workouts').find())
-list_names = [''] + list(jim_tracker_db.get_collection('names').find())
+# Global Vars ( sorts them in alphabetical order)
+list_exercises = list(jim_tracker_db.get_collection('workouts').find())
+list_exercises = sorted(list_exercises, key=operator.itemgetter('Name'))
+list_exercises = [''] + list_exercises
+list_names = list(jim_tracker_db.get_collection('names').find())
+list_names = sorted(list_names, key=operator.itemgetter('name'))
+list_names = [''] + list_names
 
 @app.route('/')
 @app.route('/home')
@@ -48,12 +53,17 @@ def add_entry():
 def see_raw():
     if request.method == 'POST':
         name = request.form['name']
-        print(f"\n\n\n{list_names}\n\n\n\n")
-        res = jim_tracker_db.get_collection('logs').find({'name':name})
+        exercise = request.form['exercise']
+        
+        if exercise.strip() == "":
+            res = jim_tracker_db.get_collection('logs').find({'name':name})
+        else:
+            res = jim_tracker_db.get_collection('logs').find({'name':name, 'exercise':exercise})
+            
         return render_template("raw-displayed.html", raw_data = list(res))
 
 
-    return render_template("see-raw.html", list_names=list_names)
+    return render_template("see-raw.html", list_names=list_names, list_exercises=list_exercises)
 
 @app.route('/plot-progress', methods=['GET', 'POST'])
 def plot_progress():
@@ -72,7 +82,7 @@ def plot_progress():
         output.seek(0)
         return Response(output.read(), mimetype='image/png')
 
-    return render_template('plot-progress.html')
+    return render_template('plot-progress.html', list_exercises=list_exercises, list_names=list_names)
 
 
 # Function to log entry

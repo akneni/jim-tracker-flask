@@ -18,6 +18,16 @@
                     {%endfor%}
                 </select>
             </div>
+
+            <div class="input-group">
+                <label for="exercise">Exercise (optional):</label>
+                <select id="exercise" name="exercise">                    
+                    {%for i in list_exercises%}
+                        <option value="{{ i.Name }}">{{ i.Name }}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
             <input type="submit" value="Enter" class="submit-button">
         </form>
     </div>

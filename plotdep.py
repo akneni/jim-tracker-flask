@@ -18,11 +18,24 @@ def display_progress(name, exercise, max_rep, min_rep, jim_tracker_db):
         pass
 
 
+    print(f"\n\n\n\n\n\n    display_progress\nMax: |{max_rep}|\nMin: |{min_rep}| \n\n\n\n\n\n")
+
     if max_rep > 0:
         df = df[df['reps'] <= max_rep]
     if min_rep > 0:
         df = df[df['reps'] >= min_rep]
     
+    # get the largest value in each day
+    try:
+        dates = df['date'].unique()
+        weight = df[['date', 'weight']].groupby("date").max()['weight'].to_numpy()
+        placeholder = pd.DataFrame({
+            "date":dates,
+            "weight":weight
+        })
+        df = placeholder
+    except Exception:
+        pass
 
     x_vals = pd.to_datetime(df["date"])
 
@@ -39,23 +52,18 @@ def display_progress(name, exercise, max_rep, min_rep, jim_tracker_db):
         plt.title(exercise)
         plt.xlabel("Timespan")
         plt.ylabel("Weight")
-        plt.plot(x_vals, df['weight'])
+        plt.plot(x_vals, df['weight'], marker='v')  # Add marker='v' here
     elif wk_df[wk_df['Name'] == exercise]['Category'].iloc[0] == 'unweighted':
-        # if see_progress_rep_max.strip() != "":
-        #     st.warning("Rep Rage Field is only for weighted excersises")
-        #     return
         plt.title(exercise)
         plt.xlabel("Timespan")
         plt.ylabel("Reps")
-        plt.plot(x_vals, df['reps'])
+        plt.plot(x_vals, df['reps'], marker='v')  # Add marker='v' here
     elif wk_df[wk_df['Name'] == exercise]['Category'].iloc[0] == 'timed':
-        # if see_progress_rep_max.strip() != "":
-        #     st.warning("Rep Rage Field is only for weighted excersises")
-        #     return
         plt.title(exercise)
         plt.xlabel("Timespan")
         plt.ylabel("Seconds")
-        plt.plot(x_vals, df['reps'])
+        plt.plot(x_vals, df['reps'], marker='v')  # Add marker='v' here
+    
     
     locator = mdates.AutoDateLocator()
     plt.gca().xaxis.set_major_locator(locator)

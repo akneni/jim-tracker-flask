@@ -40,6 +40,7 @@
             <table class="dark-table">
                 <thead>
                     <tr>
+                        <th>Date</th>
                         <th>Exercise</th>
                         <th>Weight</th>
                         <th>Reps/Seconds</th>
@@ -48,6 +49,7 @@
                 <tbody>
                     {% for i in raw_data %}
                     <tr>
+                        <td>{{ i.date }}</td>
                         <td>{{ i.exercise }}</td>
                         <td>{{ i.weight }}</td>
                         <td>{{ i.reps }}</td>
