@@ -4,13 +4,15 @@ from datetime import datetime
 import os
 import matplotlib.pyplot as plt
 import io
-from plotdep import *
 import operator
+from dotenv import load_dotenv
+from plotdep import *
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
 # Connect to MongoDB
-AUTH_TOKEN = os.environ['AUTH_TOKEN']
+load_dotenv()
+AUTH_TOKEN = os.getenv("AUTH_TOKEN")
 client = pymongo.MongoClient(AUTH_TOKEN)
 jim_tracker_db = client.get_database('jim-tracker')
 

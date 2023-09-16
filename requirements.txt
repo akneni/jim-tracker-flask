@@ -2,3 +2,4 @@ flask
 pymongo
 pandas
 matplotlib
+python-dotenv
