@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jim Tracker</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -8,18 +9,12 @@
 
     <div class="container">
         <h1>Jim Tracker</h1>
-        <div>
+        <div class="button-container">
             <a href="{{ url_for('add_entry') }}"><button class="submit-button">Add Entry</button></a>
-            <br>
             <a href="{{ url_for('see_raw') }}"><button class="submit-button">See Raw Data</button></a>
-            <br>
             <a href="{{ url_for('plot_progress') }}"><button class="submit-button">Plot Progress</button></a>
         </div>
-
-        
     </div>
-
-
 
 </body>
 </html>

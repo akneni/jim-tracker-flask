@@ -1,32 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>See Raw Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jim Tracker - Raw Data</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-
-    <style>
-        /* Dark theme for the table */
-        .dark-table {
-            width: 100%;
-            border-collapse: separate;  /* Changed from collapse to separate */
-            border-spacing: 0;  /* Add this line to remove spacing between cells */
-            background-color: #333;
-            color: #fff;
-            border-radius: 12px;  /* Add this line for rounded corners */
-            overflow: hidden;  /* Add this line to clip the inner content to the rounded corners */
-        }
-        .dark-table th, .dark-table td {
-            border: 1px solid #555;
-            padding: 10px;
-            text-align: left;
-        }
-        .dark-table th {
-            background-color: #444;
-        }
-        .dark-table tr:nth-child(even) {
-            background-color: #3a3a3a;
-        }
-    </style>
 </head>
 <body>
 
@@ -35,7 +12,7 @@
             <h1>No data</h1>
         {% else %}
             <h1>Raw Data for {{ raw_data[0].name }}</h1>
-        
+
             <!-- Table layout -->
             <table class="dark-table">
                 <thead>
@@ -58,9 +35,31 @@
                 </tbody>
             </table>
         {% endif %}
-
     </div>
+
+    <style>
+        /* Dark theme for the table */
+        .dark-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: #333;
+            color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .dark-table th, .dark-table td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: left;
+        }
+        .dark-table th {
+            background-color: #444;
+        }
+        .dark-table tr:nth-child(even) {
+            background-color: #3a3a3a;
+        }
+    </style>
 
 </body>
 </html>
-

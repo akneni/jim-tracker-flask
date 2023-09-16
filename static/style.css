@@ -15,62 +15,57 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.button-container {
+    width: 100%;  /* Make the button container take up the full width */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;  /* This will make the buttons stretch to fill the container */
+    gap: 1rem;
+}
+
 h1 {
     text-align: center;
     margin-bottom: 20px;
-}
-
-.input-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input[type="text"] {
-    width: 97%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #333;
-    color: #fff;
-}
-
-input[type="number"] {
-    font-family: Arial, sans-serif;
-    background-color: #333;
-    font-size: 16px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100px;
-}
-
-select {
-    font-family: Arial, sans-serif;
-    background-color: #333;
-    color: #fff; /* You might want to set the text color to white or another color that contrasts with the background */
-    font-size: 16px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%; /* You can adjust the width as needed */
+    color: #6200ea;  /* Make the title purple */
 }
 
 .submit-button {
-    display: block;
-    width: 100%;
+    width: 100%;  /* Make the button stretch to full width of its container */
     padding: 10px;
     background-color: #6200ea;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .submit-button:hover {
     background-color: #3700b3;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        margin: auto;
+        padding: 15px;
+    }
+}
+
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+}
+
+/* Common class for all form inputs */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    margin-top: 5px;
 }
