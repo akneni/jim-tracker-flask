@@ -1,13 +1,7 @@
-from flask import Flask, request, render_template, Response
-import pymongo
 import pandas as pd
-from datetime import datetime
-import os
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import matplotlib.dates as mdates
 import matplotlib.ticker as ticker
-import io
 
 def display_progress(name, exercise, max_rep, min_rep, jim_tracker_db):
     res = jim_tracker_db.get_collection('logs').find({'name':name, 'exercise':exercise})

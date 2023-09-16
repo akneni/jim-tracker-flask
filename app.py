@@ -3,7 +3,6 @@ import pymongo
 from datetime import datetime
 import os
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import io
 from plotdep import *
 import operator
