@@ -75,7 +75,9 @@ def plot_progress():
         min_rep = float(request.form['min']) if str(request.form['min']) != '' else -1
         
         # Call the display_progress function
-        display_progress(name, exercise, max_rep, min_rep, jim_tracker_db)
+        display = display_progress(name, exercise, max_rep, min_rep, jim_tracker_db)
+        if not display:
+            return render_template("raw-displayed.html", raw_data=[])
         
         # Generate the plot and return it as a response
         output = io.BytesIO()

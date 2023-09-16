@@ -11,13 +11,13 @@ def display_progress(name, exercise, max_rep, min_rep, jim_tracker_db):
     except KeyError:
         pass
 
-
-    print(f"\n\n\n\n\n\n    display_progress\nMax: |{max_rep}|\nMin: |{min_rep}| \n\n\n\n\n\n")
-
-    if max_rep > 0:
-        df = df[df['reps'] <= max_rep]
-    if min_rep > 0:
-        df = df[df['reps'] >= min_rep]
+    try:
+        if max_rep > 0:
+            df = df[df['reps'] <= max_rep]
+        if min_rep > 0:
+            df = df[df['reps'] >= min_rep]
+    except Exception as err:
+        print("\n"*4 + str(err) + "\n"*4)
     
     # get the largest value in each day
     try:
@@ -28,8 +28,14 @@ def display_progress(name, exercise, max_rep, min_rep, jim_tracker_db):
             "weight":weight
         })
         df = placeholder
-    except Exception:
-        pass
+    except Exception as err:
+        print("\n"*4 + str(err) + "\n"*4)
+
+    try:
+        if len(df['date']) == 0:
+            return False
+    except KeyError:
+        return False
 
     x_vals = pd.to_datetime(df["date"])
 
@@ -64,4 +70,4 @@ def display_progress(name, exercise, max_rep, min_rep, jim_tracker_db):
     plt.gca().xaxis.set_major_formatter(mdates.AutoDateFormatter(locator))
     plt.gca().xaxis.set_major_locator(ticker.MaxNLocator(nbins=4))
 
-    return plt
+    return True
